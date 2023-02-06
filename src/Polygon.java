@@ -7,15 +7,18 @@ import java.text.DecimalFormat;
  * @Description identifies if the shape imputed is a polygon and prints out the side lengths, number of sides, type, area and perimeter.
  */
 public class Polygon {
-
-    //instance variables
+    /**
+     * instance variables
+     */
     private int sides;
     private double sideLength;
     private String type;
     private double area;
     private double perimeter;
 
-    //default constructor
+    /**
+     * default constructor
+     */
     public Polygon(){
         sides = 3;
         sideLength = 1.0;
@@ -23,8 +26,9 @@ public class Polygon {
         perimeter = 3;
         type = "triangle";
     }
-
-    //overloaded constructor
+    /**
+     * overloaded constructor
+     */
         public Polygon(int s, double sl, String t){
             sides = s;
             sideLength = sl;
@@ -39,40 +43,58 @@ public class Polygon {
             }
 
             if(type != "none"){
-                //area check
+                /**
+                 * area check
+                 */
                 getShapeArea();
 
-                //finding perimeter
+                /**
+                 * finding perimeter
+                 */
                 getShapePerimeter();
             }
         }
 
-    //methods and accessors
-        //getNumSides
+    /**
+     * methods and accessors
+     */
+        /**
+         * getNumSides
+         */
         public int getNumSides(){
             return sides;
         }
 
-        // getSideLength
+        /**
+         * getSideLength
+         */
         public double getSideLength(){
             return sideLength;
         }
 
-        // getShapeType
+        /**
+         * getShapeType
+         */
         public String getShapeType(){
             return type;
         }
 
-        //getShapeArea
+        /**
+         * getShapeArea
+         */
         public void getShapeArea(){
             area = (sides * (sideLength * sideLength)) / (4.0 * Math.tan((Math.PI / sides)));
         }
-        //getShapePerimeter
+        /**
+         * getShapePerimeter
+         */
         public void getShapePerimeter(){
             perimeter = sides * sideLength;
         }
 
-    //String output
+    /**
+     * String output
+     */
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.###"); //number pint 2 decimal places.
         if(type == "none") {
