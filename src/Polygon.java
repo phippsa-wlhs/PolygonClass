@@ -34,7 +34,9 @@ public class Polygon {
             sideLength = sl;
             type = t;
 
-            //validation check
+            /**
+             * validation check
+             */
             if(s < 3){
                 type = "none";
             }
