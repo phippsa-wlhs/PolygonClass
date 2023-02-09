@@ -74,7 +74,6 @@ public class Polygon {
         }
 
     //methods and accessors
-
         /**
          * @return the number of sides
          */
