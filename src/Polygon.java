@@ -114,7 +114,8 @@ public class Polygon {
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.###"); //number pint 2 decimal places.
         if(check == false) {
-            return "Not a valid polygon. Your polygon was given a default of "+ sides +" sides , was named \"triangle\", and each side has a length of "+sideLength+" units.";
+            return "Not a valid polygon. Your polygon was given a default of "+ sides +" sides , was named \"triangle\", and each side has a length of "+sideLength+" units. " + "\n" +
+                    "The area of your \"triangle\" is "+ df.format(area) + " units and the perimeter of your \"triangle\" " + df.format(perimeter) + " units. ";
         }else{
             return "Your shape is a " + type + " and it has " + sides + " sides." + "\n"
                     + "It has a side length of " + df.format(sideLength) + "." + "\n"
