@@ -16,8 +16,13 @@ public class Polygon {
     private double area;
     private double perimeter;
 
+    private boolean check;
+
     /**
      * default constructor
+     *
+     * @deprecation Creates a polygon with the side lengths, sides, area, perimeter, and type
+     *
      */
     public Polygon(){
         sides = 3;
@@ -28,79 +33,89 @@ public class Polygon {
     }
     /**
      * overloaded constructor
+     *
+     * @description test to see if is it a proper polygon and if so runs with it otherwise puts in default values
+     *
+     * @param s number of sides
+     * @param sl the length of a side
+     * @param t the type of polygon
+     *
      */
         public Polygon(int s, double sl, String t){
-            sides = s;
-            sideLength = sl;
-            type = t;
-
             /**
              * validation check
+             *
+             * @description checks to see if it is a true polygon and then will construct it otherwise will input default values
              */
-            if(s < 3){
-                type = "none";
-            }
-            if(sl <= 0){
-                type = "none";
+            if(s < 2 || sl < 0.0){
+                sides = 3;
+                sideLength = 1.0;
+                type = "triangle";
+                area = 0.433;
+                perimeter = 3;
+                check = false;
+            }else{
+                sides = s;
+                sideLength = sl;
+                type = t;
+                check = true;
             }
 
-            if(type != "none"){
+            if(s > 2 || sl > 0.0){
                 /**
-                 * area check
+                 * @returns area
                  */
                 getShapeArea();
-
                 /**
-                 * finding perimeter
+                 * @returns perimeter
                  */
                 getShapePerimeter();
             }
         }
 
-    /**
-     * methods and accessors
-     */
+    //methods and accessors
+
         /**
-         * getNumSides
+         * @return the number of sides
          */
         public int getNumSides(){
             return sides;
         }
 
         /**
-         * getSideLength
+         * @return the side length
          */
         public double getSideLength(){
             return sideLength;
         }
 
         /**
-         * getShapeType
+         * @return the polygon type
          */
         public String getShapeType(){
             return type;
         }
 
         /**
-         * getShapeArea
+         * @description gets shape area
          */
         public void getShapeArea(){
             area = (sides * (sideLength * sideLength)) / (4.0 * Math.tan((Math.PI / sides)));
         }
         /**
-         * getShapePerimeter
+         * @description gets shape perimeter
          */
         public void getShapePerimeter(){
             perimeter = sides * sideLength;
         }
 
     /**
-     * String output
+     * @description prints out if it is not valid and gives it, its own variable set otherwise it will print out sides, sideLength, type, perimeter, and, area.
      */
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.###"); //number pint 2 decimal places.
-        if(type == "none") {
-            return "Not a valid polygon";
+        if(check == false) {
+            return "Not a valid polygon. Your polygon was given a default of "+ sides +" sides , was named \"triangle\", and each side has a length of "+sideLength+" units.";
         }else{
             return "Your shape is a " + type + " and it has " + sides + " sides." + "\n"
                     + "It has a side length of " + df.format(sideLength) + "." + "\n"

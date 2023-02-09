@@ -3,7 +3,7 @@ public class PolygonTester {
         /**
          * test your polygon here
          */
-        Polygon polygon1 = new Polygon(5,6.865,"pentagon");
+        Polygon polygon1 = new Polygon(5,6.865,"rectangle");
         System.out.println(polygon1);
     }
 }
