@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 /**
  * @file Polygon Java
- * @Date 2/2/23
+ * @Date 2/10/23
  * @Author Andrew Phipps
  *
  * @Description identifies if the shape imputed is a polygon and prints out the side lengths, number of sides, type, area and perimeter.
@@ -15,7 +15,6 @@ public class Polygon {
     private String type;
     private double area;
     private double perimeter;
-
     private boolean check;
 
     /**
@@ -30,6 +29,7 @@ public class Polygon {
         area = 0.433;
         perimeter = 3;
         type = "triangle";
+        check = true;
     }
     /**
      * overloaded constructor
@@ -65,11 +65,11 @@ public class Polygon {
                 /**
                  * @returns area
                  */
-                getShapeArea();
+                calculateArea();
                 /**
                  * @returns perimeter
                  */
-                getShapePerimeter();
+                calculatePerimeter();
             }
         }
 
@@ -82,11 +82,33 @@ public class Polygon {
         }
 
         /**
+         * @description if newSides is greater than or equal to 3, sides become newSides otherwise it stays as sides
+         * @param newSides
+         */
+        public void setNumSides(int newSides) {
+            if(sides <= 3){
+                sides = newSides;
+            }
+        }
+
+        /**
          * @return the side length
          */
         public double getSideLength(){
             return sideLength;
         }
+
+        /**
+         * @description if newSideLength is not greater than or equal to zero, sideLength becomes newSideLength otherwise it stays as sideLength
+         * @param newSideLength
+         */
+        public void setSideLength(double newSideLength){
+
+            if(newSideLength >= 0) {
+                sideLength = newSideLength;
+            }
+        }
+
 
         /**
          * @return the polygon type
@@ -96,32 +118,50 @@ public class Polygon {
         }
 
         /**
-         * @description gets shape area
+         * @description if newType does not equal none, type becomes newType otherwise it stays type
+         * @param newType
          */
-        public void getShapeArea(){
+        public void setShapeName(String newType){
+                if(newType != ("none")){
+                    type = newType;
+                }
+            }
+
+
+        /**
+         * @description calculate shape area
+         */
+        public double calculateArea(){
             area = (sides * (sideLength * sideLength)) / (4.0 * Math.tan((Math.PI / sides)));
+            return area = Math.round(area*1000)/1000.0;
         }
         /**
-         * @description gets shape perimeter
+         * @description get shape area and rounds it to the nearest 1000th place
          */
-        public void getShapePerimeter(){
-            perimeter = sides * sideLength;
+        public double getArea(){
+        area = (sides * (sideLength * sideLength)) / (4.0 * Math.tan((Math.PI / sides)));
+        return area = Math.round(area*1000)/1000.0;
+    }
+        /**
+         * @description gets shape perimeter and rounds it to the nearest 1000th place
+         */
+        public double calculatePerimeter(){
+            perimeter = Math.round(sides * sideLength * 1000);
+            return perimeter /= 1000.0;
         }
 
     /**
      * @description prints out if it is not valid and gives it, its own variable set otherwise it will print out sides, sideLength, type, perimeter, and, area.
      */
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.###"); //number point 2 decimal places.
         if(check == false) {
             return "Not a valid polygon. Your polygon was given a default of "+ sides +" sides , was named \"triangle\", and each side has a length of "+sideLength+
-                    " units. " + "\n" + "The area of your \"triangle\" is "+ df.format(area) + " units and the perimeter of your \"triangle\" " + df.format(perimeter)
-                    + " units. ";
+                    " units. " + "\n" + "The area of your \"triangle\" is "+ area + " units and the perimeter of your \"triangle\" " + perimeter + " units. ";
         }else{
             return "Your shape is a " + type + " and it has " + sides + " sides." + "\n"
-                    + "It has a side length of " + df.format(sideLength) + "." + "\n"
-                    + "It has a perimeter of " + df.format(perimeter) + " units." + "\n"
-                    + "It has an area of " + df.format(area) + " units.";
+                    + "It has a side length of " + sideLength + "." + "\n"
+                    + "It has a perimeter of " + perimeter + " units." + "\n"
+                    + "It has an area of " + area + " units.";
             }
         }
     }
